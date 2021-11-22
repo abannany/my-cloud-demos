@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+
+  httpd:
+    build:
+      context : ./my-httpd
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+    restart: always
+
+
+  api:
+    build:
+      context: ./mywebapp
+    environment:
+      NODE_ENV: production
+    restart: always
+    deploy:
+      replicas: 2
